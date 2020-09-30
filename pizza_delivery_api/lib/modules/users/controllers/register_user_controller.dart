@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:pizza_delivery_api/modules/users/controller/models/register_user_rq.dart';
-import 'package:pizza_delivery_api/modules/users/service/i_user_service.dart';
+import 'package:pizza_delivery_api/application/exceptions/user_already_exists_exception.dart';
+import 'package:pizza_delivery_api/modules/users/controllers/models/register_user_rq.dart';
+import 'package:pizza_delivery_api/modules/users/services/i_user_service.dart';
 import 'package:pizza_delivery_api/modules/users/view_models/register_user_input_model.dart';
 import 'package:pizza_delivery_api/pizza_delivery_api.dart';
 
@@ -18,6 +19,11 @@ class RegisterUserController extends ResourceController {
       await _service.registerUser(registerInput);
       return Response.ok({
         'message': 'Usuário criado com sucesso'
+      });
+    } on UserAlreadyExistsException catch (e) {
+      print(e);
+      return Response.conflict(body: {
+        'message': 'Usuário já existe'
       });
     } catch (e) {
       print(e);

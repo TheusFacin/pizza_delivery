@@ -62,3 +62,6 @@ CREATE TABLE IF NOT EXISTS pedido_item (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+INSERT INTO `cardapio_grupo` (`id_cardapio_grupo`, `nome_grupo`) VALUES (1,'Pizzas Salgadas'),(2,'Pizzas Doces');
+INSERT INTO `cardapio_grupo_item` (`id_cardapio_grupo_item`, `id_cardapio_grupo`, `nome`, `valor`) VALUES (1,1,'Pizza de Mussarela',36.00),(2,1,'Pizza de Calabresa',40.00),(3,2,'Pizza de Chocolate',25.00),(4,2,'Pizza de Banana',25.00);
